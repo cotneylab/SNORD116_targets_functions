@@ -1,0 +1,127 @@
+We recommend using the xeon partition (rather than general or himem) to run this application (hisat2)
+17792298 reads; of these:
+  17792298 (100.00%) were paired; of these:
+    655309 (3.68%) aligned concordantly 0 times
+    16075341 (90.35%) aligned concordantly exactly 1 time
+    1061648 (5.97%) aligned concordantly >1 times
+96.32% overall alignment rate
+16195204 reads; of these:
+  16195204 (100.00%) were paired; of these:
+    625552 (3.86%) aligned concordantly 0 times
+    14590393 (90.09%) aligned concordantly exactly 1 time
+    979259 (6.05%) aligned concordantly >1 times
+96.14% overall alignment rate
+15100538 reads; of these:
+  15100538 (100.00%) were paired; of these:
+    554908 (3.67%) aligned concordantly 0 times
+    13677100 (90.57%) aligned concordantly exactly 1 time
+    868530 (5.75%) aligned concordantly >1 times
+96.33% overall alignment rate
+15466346 reads; of these:
+  15466346 (100.00%) were paired; of these:
+    512899 (3.32%) aligned concordantly 0 times
+    14059192 (90.90%) aligned concordantly exactly 1 time
+    894255 (5.78%) aligned concordantly >1 times
+96.68% overall alignment rate
+16416647 reads; of these:
+  16416647 (100.00%) were paired; of these:
+    568307 (3.46%) aligned concordantly 0 times
+    14880918 (90.65%) aligned concordantly exactly 1 time
+    967422 (5.89%) aligned concordantly >1 times
+96.54% overall alignment rate
+18742102 reads; of these:
+  18742102 (100.00%) were paired; of these:
+    625009 (3.33%) aligned concordantly 0 times
+    17037107 (90.90%) aligned concordantly exactly 1 time
+    1079986 (5.76%) aligned concordantly >1 times
+96.67% overall alignment rate
+19485076 reads; of these:
+  19485076 (100.00%) were paired; of these:
+    660916 (3.39%) aligned concordantly 0 times
+    17660058 (90.63%) aligned concordantly exactly 1 time
+    1164102 (5.97%) aligned concordantly >1 times
+96.61% overall alignment rate
+14609437 reads; of these:
+  14609437 (100.00%) were paired; of these:
+    585105 (4.00%) aligned concordantly 0 times
+    13140702 (89.95%) aligned concordantly exactly 1 time
+    883630 (6.05%) aligned concordantly >1 times
+96.00% overall alignment rate
+13288939 reads; of these:
+  13288939 (100.00%) were paired; of these:
+    429849 (3.23%) aligned concordantly 0 times
+    12005568 (90.34%) aligned concordantly exactly 1 time
+    853522 (6.42%) aligned concordantly >1 times
+96.77% overall alignment rate
+12595711 reads; of these:
+  12595711 (100.00%) were paired; of these:
+    418233 (3.32%) aligned concordantly 0 times
+    11463056 (91.01%) aligned concordantly exactly 1 time
+    714422 (5.67%) aligned concordantly >1 times
+96.68% overall alignment rate
+16237060 reads; of these:
+  16237060 (100.00%) were paired; of these:
+    595085 (3.66%) aligned concordantly 0 times
+    14712660 (90.61%) aligned concordantly exactly 1 time
+    929315 (5.72%) aligned concordantly >1 times
+96.34% overall alignment rate
+12493785 reads; of these:
+  12493785 (100.00%) were paired; of these:
+    1190278 (9.53%) aligned concordantly 0 times
+    10530634 (84.29%) aligned concordantly exactly 1 time
+    772873 (6.19%) aligned concordantly >1 times
+90.47% overall alignment rate
+17770647 reads; of these:
+  17770647 (100.00%) were paired; of these:
+    566070 (3.19%) aligned concordantly 0 times
+    16119721 (90.71%) aligned concordantly exactly 1 time
+    1084856 (6.10%) aligned concordantly >1 times
+96.81% overall alignment rate
+22415043 reads; of these:
+  22415043 (100.00%) were paired; of these:
+    727230 (3.24%) aligned concordantly 0 times
+    20338202 (90.73%) aligned concordantly exactly 1 time
+    1349611 (6.02%) aligned concordantly >1 times
+96.76% overall alignment rate
+18340082 reads; of these:
+  18340082 (100.00%) were paired; of these:
+    635702 (3.47%) aligned concordantly 0 times
+    16653707 (90.80%) aligned concordantly exactly 1 time
+    1050673 (5.73%) aligned concordantly >1 times
+96.53% overall alignment rate
+15950257 reads; of these:
+  15950257 (100.00%) were paired; of these:
+    588500 (3.69%) aligned concordantly 0 times
+    14408084 (90.33%) aligned concordantly exactly 1 time
+    953673 (5.98%) aligned concordantly >1 times
+96.31% overall alignment rate
+14413324 reads; of these:
+  14413324 (100.00%) were paired; of these:
+    464947 (3.23%) aligned concordantly 0 times
+    13043567 (90.50%) aligned concordantly exactly 1 time
+    904810 (6.28%) aligned concordantly >1 times
+96.77% overall alignment rate
+14586322 reads; of these:
+  14586322 (100.00%) were paired; of these:
+    455074 (3.12%) aligned concordantly 0 times
+    13233461 (90.73%) aligned concordantly exactly 1 time
+    897787 (6.15%) aligned concordantly >1 times
+96.88% overall alignment rate
+12442536 reads; of these:
+  12442536 (100.00%) were paired; of these:
+    450822 (3.62%) aligned concordantly 0 times
+    11153444 (89.64%) aligned concordantly exactly 1 time
+    838270 (6.74%) aligned concordantly >1 times
+96.38% overall alignment rate
+11400987 reads; of these:
+  11400987 (100.00%) were paired; of these:
+    415949 (3.65%) aligned concordantly 0 times
+    10248020 (89.89%) aligned concordantly exactly 1 time
+    737018 (6.46%) aligned concordantly >1 times
+96.35% overall alignment rate
+9558099 reads; of these:
+  9558099 (100.00%) were paired; of these:
+    773432 (8.09%) aligned concordantly 0 times
+    8203150 (85.82%) aligned concordantly exactly 1 time
+    581517 (6.08%) aligned concordantly >1 times
+91.91% overall alignment rate
