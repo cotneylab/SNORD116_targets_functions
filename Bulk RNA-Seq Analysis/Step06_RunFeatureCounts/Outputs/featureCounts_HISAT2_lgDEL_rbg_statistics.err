@@ -1,0 +1,324 @@
+
+        ==========     _____ _    _ ____  _____  ______          _____  
+        =====         / ____| |  | |  _ \|  __ \|  ____|   /\   |  __ \ 
+          =====      | (___ | |  | | |_) | |__) | |__     /  \  | |  | |
+            ====      \___ \| |  | |  _ <|  _  /|  __|   / /\ \ | |  | |
+              ====    ____) | |__| | |_) | | \ \| |____ / ____ \| |__| |
+        ==========   |_____/ \____/|____/|_|  \_\______/_/    \_\_____/
+	  v2.0.0
+
+//========================== featureCounts setting ===========================\\
+||                                                                            ||
+||             Input files : 35 BAM files                                     ||
+||                           o CT2-ngn2-s1.sorted.bam                         ||
+||                           o CT2-ngn2-s2.sorted.bam                         ||
+||                           o CT2-ngn2-s3.sorted.bam                         ||
+||                           o CT2-ngn2-s4.sorted.bam                         ||
+||                           o CT2-ngn2-s5.sorted.bam                         ||
+||                           o CT2-ngn2-s6.sorted.bam                         ||
+||                           o CT2-snord116-ic-ngn2-s1.sorted.bam             ||
+||                           o CT2-snord116-ic-ngn2-s2.sorted.bam             ||
+||                           o CT2-snord116-ic-ngn2-s3.sorted.bam             ||
+||                           o CT2-snord116-ic-ngn2-s4.sorted.bam             ||
+||                           o CT2-snord116-ic-ngn2-s5.sorted.bam             ||
+||                           o CT2-snord116-ic-ngn2-s6.sorted.bam             ||
+||                           o CT2-snord116-ngn2-s1.sorted.bam                ||
+||                           o CT2-snord116-ngn2-s2.sorted.bam                ||
+||                           o CT2-snord116-ngn2-s3.sorted.bam                ||
+||                           o CT2-snord116-ngn2-s4.sorted.bam                ||
+||                           o CT2-snord116-ngn2-s5.sorted.bam                ||
+||                           o CT2-snord116-ngn2-s6.sorted.bam                ||
+||                           o H9_NGN_1.sorted.bam                            ||
+||                           o H9_NGN_2.sorted.bam                            ||
+||                           o H9_NGN_3.sorted.bam                            ||
+||                           o H9_NGN_4.sorted.bam                            ||
+||                           o H9_NGN_5.sorted.bam                            ||
+||                           o H9_NGN_6.sorted.bam                            ||
+||                           o H9-snord116-ic-ngn2-s1.sorted.bam              ||
+||                           o H9-snord116-ic-ngn2-s2.sorted.bam              ||
+||                           o H9-snord116-ic-ngn2-s3.sorted.bam              ||
+||                           o H9-snord116-ic-ngn2-s4.sorted.bam              ||
+||                           o H9-snord116-ic-ngn2-s5.sorted.bam              ||
+||                           o H9-snord116-ic-ngn2-s6.sorted.bam              ||
+||                           o H9-SNORD116mut-NGN_1.sorted.bam                ||
+||                           o H9-SNORD116mut-NGN_2.sorted.bam                ||
+||                           o H9-SNORD116mut-NGN_3.sorted.bam                ||
+||                           o H9-SNORD116mut-NGN_4.sorted.bam                ||
+||                           o H9-SNORD116mut-NGN_5.sorted.bam                ||
+||                                                                            ||
+||             Output file : PWSRNAseq_HISAT2_featureCounts.txt               ||
+||                 Summary : PWSRNAseq_HISAT2_featureCounts.txt.summary       ||
+||              Annotation : gencode.v25.annotation.gtf (GTF)                 ||
+||      Dir for temp files : /home/FCAM/rgilmore/analysis/RNAseq/HISAT2/N ... ||
+||                                                                            ||
+||                 Threads : 4                                                ||
+||                   Level : meta-feature level                               ||
+||              Paired-end : yes                                              ||
+||      Multimapping reads : not counted                                      ||
+|| Multi-overlapping reads : not counted                                      ||
+||   Min overlapping bases : 1                                                ||
+||                                                                            ||
+||          Chimeric reads : counted                                          ||
+||        Both ends mapped : not required                                     ||
+||                                                                            ||
+\\============================================================================//
+
+//================================= Running ==================================\\
+||                                                                            ||
+|| Load annotation file gencode.v25.annotation.gtf ...                        ||
+||    Features : 1182765                                                      ||
+||    Meta-features : 58037                                                   ||
+||    Chromosomes/contigs : 25                                                ||
+||                                                                            ||
+|| Process BAM file CT2-ngn2-s1.sorted.bam...                                 ||
+||    Strand specific : reversely stranded                                    ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 20921605                                             ||
+||    Successfully assigned alignments : 14123570 (67.5%)                     ||
+||    Running time : 0.61 minutes                                             ||
+||                                                                            ||
+|| Process BAM file CT2-ngn2-s2.sorted.bam...                                 ||
+||    Strand specific : reversely stranded                                    ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 18928764                                             ||
+||    Successfully assigned alignments : 12983480 (68.6%)                     ||
+||    Running time : 0.55 minutes                                             ||
+||                                                                            ||
+|| Process BAM file CT2-ngn2-s3.sorted.bam...                                 ||
+||    Strand specific : reversely stranded                                    ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 17518097                                             ||
+||    Successfully assigned alignments : 12052572 (68.8%)                     ||
+||    Running time : 0.50 minutes                                             ||
+||                                                                            ||
+|| Process BAM file CT2-ngn2-s4.sorted.bam...                                 ||
+||    Strand specific : reversely stranded                                    ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 18061417                                             ||
+||    Successfully assigned alignments : 12220138 (67.7%)                     ||
+||    Running time : 0.54 minutes                                             ||
+||                                                                            ||
+|| Process BAM file CT2-ngn2-s5.sorted.bam...                                 ||
+||    Strand specific : reversely stranded                                    ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 19207472                                             ||
+||    Successfully assigned alignments : 13097418 (68.2%)                     ||
+||    Running time : 0.56 minutes                                             ||
+||                                                                            ||
+|| Process BAM file CT2-ngn2-s6.sorted.bam...                                 ||
+||    Strand specific : reversely stranded                                    ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 21599422                                             ||
+||    Successfully assigned alignments : 15048059 (69.7%)                     ||
+||    Running time : 0.61 minutes                                             ||
+||                                                                            ||
+|| Process BAM file CT2-snord116-ic-ngn2-s1.sorted.bam...                     ||
+||    Strand specific : reversely stranded                                    ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 22610030                                             ||
+||    Successfully assigned alignments : 15756277 (69.7%)                     ||
+||    Running time : 0.66 minutes                                             ||
+||                                                                            ||
+|| Process BAM file CT2-snord116-ic-ngn2-s2.sorted.bam...                     ||
+||    Strand specific : reversely stranded                                    ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 17266608                                             ||
+||    Successfully assigned alignments : 11757125 (68.1%)                     ||
+||    Running time : 0.49 minutes                                             ||
+||                                                                            ||
+|| Process BAM file CT2-snord116-ic-ngn2-s3.sorted.bam...                     ||
+||    Strand specific : reversely stranded                                    ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 15811033                                             ||
+||    Successfully assigned alignments : 10906899 (69.0%)                     ||
+||    Running time : 0.47 minutes                                             ||
+||                                                                            ||
+|| Process BAM file CT2-snord116-ic-ngn2-s4.sorted.bam...                     ||
+||    Strand specific : reversely stranded                                    ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 14496226                                             ||
+||    Successfully assigned alignments : 10224799 (70.5%)                     ||
+||    Running time : 0.41 minutes                                             ||
+||                                                                            ||
+|| Process BAM file CT2-snord116-ic-ngn2-s5.sorted.bam...                     ||
+||    Strand specific : reversely stranded                                    ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 18730589                                             ||
+||    Successfully assigned alignments : 13132845 (70.1%)                     ||
+||    Running time : 0.56 minutes                                             ||
+||                                                                            ||
+|| Process BAM file CT2-snord116-ic-ngn2-s6.sorted.bam...                     ||
+||    Strand specific : reversely stranded                                    ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 14826434                                             ||
+||    Successfully assigned alignments : 9491970 (64.0%)                      ||
+||    Running time : 0.43 minutes                                             ||
+||                                                                            ||
+|| Process BAM file CT2-snord116-ngn2-s1.sorted.bam...                        ||
+||    Strand specific : reversely stranded                                    ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 20760830                                             ||
+||    Successfully assigned alignments : 14228880 (68.5%)                     ||
+||    Running time : 0.64 minutes                                             ||
+||                                                                            ||
+|| Process BAM file CT2-snord116-ngn2-s2.sorted.bam...                        ||
+||    Strand specific : reversely stranded                                    ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 26128788                                             ||
+||    Successfully assigned alignments : 17814685 (68.2%)                     ||
+||    Running time : 0.81 minutes                                             ||
+||                                                                            ||
+|| Process BAM file CT2-snord116-ngn2-s3.sorted.bam...                        ||
+||    Strand specific : reversely stranded                                    ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 21110080                                             ||
+||    Successfully assigned alignments : 14479546 (68.6%)                     ||
+||    Running time : 0.63 minutes                                             ||
+||                                                                            ||
+|| Process BAM file CT2-snord116-ngn2-s4.sorted.bam...                        ||
+||    Strand specific : reversely stranded                                    ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 18438496                                             ||
+||    Successfully assigned alignments : 12814800 (69.5%)                     ||
+||    Running time : 0.56 minutes                                             ||
+||                                                                            ||
+|| Process BAM file CT2-snord116-ngn2-s5.sorted.bam...                        ||
+||    Strand specific : reversely stranded                                    ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 17006814                                             ||
+||    Successfully assigned alignments : 11500598 (67.6%)                     ||
+||    Running time : 0.53 minutes                                             ||
+||                                                                            ||
+|| Process BAM file CT2-snord116-ngn2-s6.sorted.bam...                        ||
+||    Strand specific : reversely stranded                                    ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 17239925                                             ||
+||    Successfully assigned alignments : 11545616 (67.0%)                     ||
+||    Running time : 0.55 minutes                                             ||
+||                                                                            ||
+|| Process BAM file H9_NGN_1.sorted.bam...                                    ||
+||    Strand specific : reversely stranded                                    ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 45020269                                             ||
+||    Successfully assigned alignments : 32196151 (71.5%)                     ||
+||    Running time : 1.55 minutes                                             ||
+||                                                                            ||
+|| Process BAM file H9_NGN_2.sorted.bam...                                    ||
+||    Strand specific : reversely stranded                                    ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 46171828                                             ||
+||    Successfully assigned alignments : 32120369 (69.6%)                     ||
+||    Running time : 1.62 minutes                                             ||
+||                                                                            ||
+|| Process BAM file H9_NGN_3.sorted.bam...                                    ||
+||    Strand specific : reversely stranded                                    ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 49221172                                             ||
+||    Successfully assigned alignments : 32762742 (66.6%)                     ||
+||    Running time : 1.88 minutes                                             ||
+||                                                                            ||
+|| Process BAM file H9_NGN_4.sorted.bam...                                    ||
+||    Strand specific : reversely stranded                                    ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 66623642                                             ||
+||    Successfully assigned alignments : 47918426 (71.9%)                     ||
+||    Running time : 2.22 minutes                                             ||
+||                                                                            ||
+|| Process BAM file H9_NGN_5.sorted.bam...                                    ||
+||    Strand specific : reversely stranded                                    ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 112035439                                            ||
+||    Successfully assigned alignments : 76752047 (68.5%)                     ||
+||    Running time : 4.50 minutes                                             ||
+||                                                                            ||
+|| Process BAM file H9_NGN_6.sorted.bam...                                    ||
+||    Strand specific : reversely stranded                                    ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 55752733                                             ||
+||    Successfully assigned alignments : 37744886 (67.7%)                     ||
+||    Running time : 1.98 minutes                                             ||
+||                                                                            ||
+|| Process BAM file H9-snord116-ic-ngn2-s1.sorted.bam...                      ||
+||    Strand specific : reversely stranded                                    ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 79845406                                             ||
+||    Successfully assigned alignments : 53203065 (66.6%)                     ||
+||    Running time : 2.77 minutes                                             ||
+||                                                                            ||
+|| Process BAM file H9-snord116-ic-ngn2-s2.sorted.bam...                      ||
+||    Strand specific : reversely stranded                                    ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 90648257                                             ||
+||    Successfully assigned alignments : 59910645 (66.1%)                     ||
+||    Running time : 3.10 minutes                                             ||
+||                                                                            ||
+|| Process BAM file H9-snord116-ic-ngn2-s3.sorted.bam...                      ||
+||    Strand specific : reversely stranded                                    ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 84137096                                             ||
+||    Successfully assigned alignments : 56415218 (67.1%)                     ||
+||    Running time : 2.85 minutes                                             ||
+||                                                                            ||
+|| Process BAM file H9-snord116-ic-ngn2-s4.sorted.bam...                      ||
+||    Strand specific : reversely stranded                                    ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 102595597                                            ||
+||    Successfully assigned alignments : 67307984 (65.6%)                     ||
+||    Running time : 3.65 minutes                                             ||
+||                                                                            ||
+|| Process BAM file H9-snord116-ic-ngn2-s5.sorted.bam...                      ||
+||    Strand specific : reversely stranded                                    ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 79363114                                             ||
+||    Successfully assigned alignments : 52092942 (65.6%)                     ||
+||    Running time : 2.63 minutes                                             ||
+||                                                                            ||
+|| Process BAM file H9-snord116-ic-ngn2-s6.sorted.bam...                      ||
+||    Strand specific : reversely stranded                                    ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 97421147                                             ||
+||    Successfully assigned alignments : 66014008 (67.8%)                     ||
+||    Running time : 3.19 minutes                                             ||
+||                                                                            ||
+|| Process BAM file H9-SNORD116mut-NGN_1.sorted.bam...                        ||
+||    Strand specific : reversely stranded                                    ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 44596820                                             ||
+||    Successfully assigned alignments : 30631300 (68.7%)                     ||
+||    Running time : 1.52 minutes                                             ||
+||                                                                            ||
+|| Process BAM file H9-SNORD116mut-NGN_2.sorted.bam...                        ||
+||    Strand specific : reversely stranded                                    ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 38742454                                             ||
+||    Successfully assigned alignments : 26803877 (69.2%)                     ||
+||    Running time : 1.32 minutes                                             ||
+||                                                                            ||
+|| Process BAM file H9-SNORD116mut-NGN_3.sorted.bam...                        ||
+||    Strand specific : reversely stranded                                    ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 33350361                                             ||
+||    Successfully assigned alignments : 23000091 (69.0%)                     ||
+||    Running time : 1.13 minutes                                             ||
+||                                                                            ||
+|| Process BAM file H9-SNORD116mut-NGN_4.sorted.bam...                        ||
+||    Strand specific : reversely stranded                                    ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 36303875                                             ||
+||    Successfully assigned alignments : 25702734 (70.8%)                     ||
+||    Running time : 1.20 minutes                                             ||
+||                                                                            ||
+|| Process BAM file H9-SNORD116mut-NGN_5.sorted.bam...                        ||
+||    Strand specific : reversely stranded                                    ||
+||    Paired-end reads are included.                                          ||
+||    Total alignments : 37933012                                             ||
+||    Successfully assigned alignments : 27661452 (72.9%)                     ||
+||    Running time : 1.23 minutes                                             ||
+||                                                                            ||
+||                                                                            ||
+|| Summary of counting results can be found in file "/home/FCAM/rgilmore/ana  ||
+|| lysis/RNAseq/HISAT2/NGNneu/PWS3/featureCounts/PWSRNAseq_HISAT2_featureCou  ||
+|| nts.txt.summary"                                                           ||
+||                                                                            ||
+\\============================================================================//
+
