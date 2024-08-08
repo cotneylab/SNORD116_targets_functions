@@ -6,7 +6,7 @@ Files generated from DESeq2 analysis in R.
 - "CplusB" means the design was ```DESeqDataSetFromMatrix(design = ~ Genetic.Background + Condition + Genetic.Background:Condition)```
 - "ConditionOnly" means the design was ```DESeqDataSetFromMatrix(design = ~ Condition)```
 - All other files (*unspecified in file name*) means the design was design was ```DESeqDataSetFromMatrix(design = ~ Background_Condition)```
-  * This was the design used for most downstream analyses. To use this design, create a column in Metadata file binding the "Genetic.Background" and "Condition" columns with a "_". (*Shown in .R code.*) \
+  * This was the design used for most downstream analyses. To use this design, create a column in Metadata file binding the "Genetic.Background" and "Condition" columns with a "_". (*Shown in .R code.*)
 
 &emsp;*The SharedGenesAnalysis, which focused on genes shared by both genetic backgrounds and deletion types, used DEGs that were statistically significant across all three design conditions.*
 
