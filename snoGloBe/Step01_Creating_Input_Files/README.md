@@ -1,5 +1,5 @@
 # Step 1 - Create Input Files for snoGloBe #
-- Step 1.1 - Retrieve ENSEMBL gtf file. *The one we used for analysis is included in this folder.*
+- Step 1.1 - Retrieve ENSEMBL gtf file.
 - Step 1.2 - Parse the gtf file for snoRNAs and create a bed file.
 - Step 1.3 - Use bedtools to convert the .bed file into a fasta (.fa) file.
 
