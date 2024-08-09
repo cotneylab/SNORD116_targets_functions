@@ -1,4 +1,4 @@
-Files generated from DESeq2 analysis in R.
+***Output files from DESeq2 analysis in R will be linked in Zenodo as they are too large for Github upload.***
 - Files ending in ‘.RData’ are DESeq2 objects.
 - Files ending in ‘.csv’ are results tables using various ```DESeqDataSetFromMatrix(design = )``` options in DESeq2 determined from Metadata file.
 
