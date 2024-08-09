@@ -1,0 +1,2 @@
+#Retrieve gtf file from ENSEMBL - use whichever version you prefer
+http://ftp.ensembl.org/pub/release-88/gtf/homo_sapiens/Homo_sapiens.GRCh38.88.gtf.gz
