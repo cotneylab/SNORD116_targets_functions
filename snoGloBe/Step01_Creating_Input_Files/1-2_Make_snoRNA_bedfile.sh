@@ -1,0 +1,1 @@
+cat Homo_sapiens.GRCh38.88.gtf | grep "snoRNA" | awk 'OFS="\t" {if ($3=="gene") {print $1,$4-1,$5,$10"_"$14,".",$7}}' | tr -d '";' | awk '{print "chr"$0}' | sed -e 's/chrKI/chrUn_KI/g' -e 's/chrGL/chrUn_GL/g'| grep -v chrUn > known_snoRNA.bed
