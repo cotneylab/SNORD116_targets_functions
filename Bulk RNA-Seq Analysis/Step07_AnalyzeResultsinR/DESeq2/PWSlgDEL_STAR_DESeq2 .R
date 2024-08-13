@@ -861,3 +861,77 @@ write.csv(as.data.frame(resDataH9lgDEL), file = "H9lgDEL_Results_DESeqSTAR.csv")
 write.csv(as.data.frame(resDataCT2lgDEL), file = "CT2lgDEL_Results_DESeqSTAR.csv")
 
 #Combine saved plots using Adobe
+
+##---Boxplots---##
+#Create boxplots of gene expression for 15q11-q13 region
+#Import csv made via UCSC genome browser
+chr15q <- read.csv("../../HISAT2/lgDEL/chr15q11-q13.csv")
+#Set column names
+names(chr15q)[1] <- "transcript_id"
+names(chr15q)[2] <- "external_gene_name"
+#Make list of unique chr15q genes
+GnsUniq <- unique(chr15q$external_gene_name)
+#Parse results table by chr15q protein-coding genes
+GeneRes15q <- subset(ResGeneID_ALL[(ResGeneID_ALL$external_gene_name) %in% GnsUniq,], gene_biotype == "protein_coding")
+#Drop padj NA's (caused by low counts)
+GeneRes15q <- GeneRes15q %>% drop_na(padj_H9)
+GeneRes15q <- GeneRes15q %>% drop_na(padj_CT2)
+#Order based on start position
+GeneRes15qOrder <- GeneRes15q[order(GeneRes15q$start_position),]
+#Math
+  #Add 1 to all counts (pseudocount)
+plusone <- function(x){
+  return (x + 1)
+}
+GeneRes15qOrder_plus1 <- GeneRes15qOrder
+GeneRes15qOrder_plus1[,c(8:42)]<- data.frame(lapply(GeneRes15qOrder[,c(8:42)],plusone))
+  #Calculate mean of WT values
+GeneRes15qOrder_plus1$wtavg_H9<-rowMeans(GeneRes15qOrder_plus1[,c(26:31)])
+GeneRes15qOrder_plus1$wtavg_CT2<-rowMeans(GeneRes15qOrder_plus1[,c(8:13)])
+  #Divide lgDEL samples by WT mean
+GeneRes15qOrder_plus1[,c(32:37)]<-GeneRes15qOrder_plus1[,c(32:37)]/GeneRes15qOrder_plus1$wtavg_H9
+GeneRes15qOrder_plus1[,c(14:19)]<-GeneRes15qOrder_plus1[,c(14:19)]/GeneRes15qOrder_plus1$wtavg_CT2
+  #Log transform
+GeneRes15qOrder_plus1_log2 <- GeneRes15qOrder_plus1
+GeneRes15qOrder_plus1_log2[,c(14:19,32:37)]<-log2(GeneRes15qOrder_plus1_log2[,c(14:19,32:37)])
+#Format data
+  #Transpose by background
+H9lgDEL_t <- t(GeneRes15qOrder_plus1_log2[,c(32:37)])
+CT2lgDEL_t <- t(GeneRes15qOrder_plus1_log2[,c(14:19)])
+  #Make the gene name the title of the columns
+colnames(H9lgDEL_t)<-GeneRes15qOrder_plus1_log2$external_gene_name
+colnames(CT2lgDEL_t)<-GeneRes15qOrder_plus1_log2$external_gene_name
+  #Reshape data
+meltH9lgDEL <- melt(H9lgDEL_t)
+meltCT2lgDEL <- melt(CT2lgDEL_t)
+  #Make list of significant DEGs within region
+H9sig15q <- GeneRes15qOrder[which(GeneRes15qOrder$padj_H9 < 0.05),]
+H9sig15q <- H9sig15q$external_gene_name
+H9cols <- c("NIPA1" = "#AB5000", "NIPA2" = "#AB5000", "MKRN3" = "#AB5000", "MAGEL2" = "#AB5000", "NDN" = "#AB5000", "NPAP1" = "#AB5000", "SNRPN" = "#AB5000", "SNURF" = "#AB5000", "UBE3A" = "#AB5000", "HERC2" = "#AB5000", "FAM189A1" = "#AB5000", "NSMCE3" = "#AB5000", "TJP1" = "#AB5000",  "KLF13" = "#AB5000", "OTUD7A" = "#AB5000")
+CT2sig15q <- GeneRes15qOrder[which(GeneRes15qOrder$padj_CT2 < 0.05),]
+CT2sig15q <- CT2sig15q$external_gene_name
+CT2cols <- c("MKRN3" = "#5D3A9B", "MAGEL2" = "#5D3A9B", "NDN" = "#5D3A9B", "SNRPN" = "#5D3A9B", "SNURF" = "#5D3A9B", "UBE3A" = "#5D3A9B", "GABRA5" = "#5D3A9B", "GABRG3" = "#5D3A9B", "OCA2" = "#5D3A9B", "HERC2" = "#5D3A9B", "KLF13" = "#5D3A9B", "OTUD7A" = "#5D3A9B", "CHRNA7" = "#5D3A9B")
+#Plot with ggplot
+H9lgDELboxplot <- ggplot(meltH9lgDEL, aes(x = Var2, y = value)) + 
+  geom_jitter(aes(colour = Var2), shape=16, position=position_jitter(0.2), alpha=0.6, size = 2.25) + 
+  geom_boxplot(aes(colour = Var2), fill = NA, outlier.shape = NA) + 
+  scale_colour_manual(values = H9cols) +
+  ylim(-12,5) +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 60, hjust=1, size=6, color="black"), axis.text.y = element_text(color="black")) + 
+  labs(title="Chr15q11-q13 Protein-Coding Gene Expression: H9lgDEL", x ="Gene", y = "log2(foldChange)")
+H9lgDELboxplot
+CT2lgDELboxplot <- ggplot(meltCT2lgDEL, aes(x = Var2, y = value)) + 
+  geom_jitter(aes(colour = Var2), shape=16, position=position_jitter(0.2), alpha=0.6, size = 2.25) + 
+  geom_boxplot(aes(colour = Var2), fill = NA, outlier.shape = NA) +
+  scale_colour_manual(values = CT2cols) +
+  ylim(-12,5) +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 60, hjust=1, size=6, color="black"), axis.text.y = element_text(color="black")) + 
+  labs(title="Chr15q11-q13 Protein-Coding Gene Expression: CT2lgDEL", x ="Gene", y = "log2(foldChange)")
+CT2lgDELboxplot
+#Save as pdf
+pdf("Chr15q11-q13_GeneExp_lgDEL.pdf", width = 8, height = 7)
+H9lgDELboxplot
+CT2lgDELboxplot
+dev.off()

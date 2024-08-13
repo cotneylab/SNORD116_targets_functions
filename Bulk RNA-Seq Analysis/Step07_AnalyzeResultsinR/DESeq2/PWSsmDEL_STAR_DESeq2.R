@@ -870,3 +870,77 @@ write.csv(as.data.frame(ResGeneID_H9smDEL), file = "H9smDEL_Results_DESeqSTAR.cs
 write.csv(as.data.frame(ResGeneID_CT2smDEL), file = "CT2smDEL_Results_DESeqSTAR.csv")
 
 #Combine saved plots using Adobe
+
+##---Boxplots---##
+#Create boxplots of gene expression for 15q11-q13 region
+#Import csv made via UCSC genome browser
+chr15q <- read.csv("../../HISAT2/smDEL/chr15q11-q13.csv")
+#Set column names
+names(chr15q)[1] <- "transcript_id"
+names(chr15q)[2] <- "external_gene_name"
+#Make list of unique chr15q genes
+GnsUniq <- unique(chr15q$external_gene_name)
+#Parse results table by chr15q protein-coding genes
+GeneRes15q <- subset(ResGeneID_ALL[(ResGeneID_ALL$external_gene_name) %in% GnsUniq,], gene_biotype == "protein_coding")
+#Drop padj NA's (caused by low counts)
+GeneRes15q <- GeneRes15q %>% drop_na(padj_H9)
+GeneRes15q <- GeneRes15q %>% drop_na(padj_CT2)
+#Order based on start position
+GeneRes15qOrder <- GeneRes15q[order(GeneRes15q$start_position),]
+#Math
+  #Add 1 to all counts (pseudocount)
+plusone <- function(x){
+  return (x + 1)
+}
+GeneRes15qOrder_plus1 <- GeneRes15qOrder
+GeneRes15qOrder_plus1[,c(8:39)]<- data.frame(lapply(GeneRes15qOrder[,c(8:39)],plusone))
+  #Calculate mean of WT values
+GeneRes15qOrder_plus1$wtavg_H9<-rowMeans(GeneRes15qOrder_plus1[,c(26:31)])
+GeneRes15qOrder_plus1$wtavg_CT2<-rowMeans(GeneRes15qOrder_plus1[,c(8:13)])
+  #Divide smDEL samples by WT mean
+GeneRes15qOrder_plus1[,c(35:39)]<-GeneRes15qOrder_plus1[,c(35:39)]/GeneRes15qOrder_plus1$wtavg_H9
+GeneRes15qOrder_plus1[,c(20:25)]<-GeneRes15qOrder_plus1[,c(20:25)]/GeneRes15qOrder_plus1$wtavg_CT2
+  #Log transform
+GeneRes15qOrder_plus1_log2 <- GeneRes15qOrder_plus1
+GeneRes15qOrder_plus1_log2[,c(20:25,35:39)]<-log2(GeneRes15qOrder_plus1_log2[,c(20:25,35:39)])
+#Format data
+  #Transpose by background
+H9smDEL_t <- t(GeneRes15qOrder_plus1_log2[,c(35:39)])
+CT2smDEL_t <- t(GeneRes15qOrder_plus1_log2[,c(20:25)])
+  #Make the gene name the title of the columns
+colnames(H9smDEL_t)<-GeneRes15qOrder_plus1_log2$external_gene_name
+colnames(CT2smDEL_t)<-GeneRes15qOrder_plus1_log2$external_gene_name
+  #Reshape data
+meltH9smDEL <- melt(H9smDEL_t)
+meltCT2smDEL <- melt(CT2smDEL_t)
+#Make list of significant DEGs within region
+H9sig15q <- GeneRes15qOrder[which(GeneRes15qOrder$padj_H9 < 0.05),]
+H9sig15q <- H9sig15q$external_gene_name
+H9cols <- c("MAGEL2" = "#E66100", "NDN" = "#E66100", "SNRPN" = "#E66100", "UBE3A" = "#E66100", "GABRB3" = "#E66100", "GABRG3" = "#E66100", "FAM189A1" = "#E66100")
+CT2sig15q <- GeneRes15qOrder[which(GeneRes15qOrder$padj_CT2 < 0.05),]
+CT2sig15q <- CT2sig15q$external_gene_name
+CT2cols <- c("NIPA1" = "#9356FF", "NIPA2" = "#9356FF", "CYFIP1" = "#9356FF", "TUBGCP5" = "#9356FF", "MAGEL2" = "#9356FF", "GABRB3" = "#9356FF", "APBA2" = "#9356FF", "FAM189A1" = "#9356FF", "KLF13" = "#9356FF")
+#Plot with ggplot
+H9smDELboxplot <- ggplot(meltH9smDEL, aes(x = Var2, y = value)) + 
+  geom_jitter(aes(colour = Var2), shape=16, position=position_jitter(0.2), alpha=0.6, size = 2.25) + 
+  geom_boxplot(aes(colour = Var2), fill = NA, outlier.shape = NA) + 
+  scale_colour_manual(values = H9cols) +
+  ylim(c(-1.9,1.9)) +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 60, hjust=1, size=6, color="black"), axis.text.y = element_text(color="black")) + 
+  labs(title="Chr15q11-q13 Protein-Coding Gene Expression: H9smDEL", x ="Gene", y = "log2(foldChange)")
+H9smDELboxplot
+CT2smDELboxplot <- ggplot(meltCT2smDEL, aes(x = Var2, y = value)) + 
+  geom_jitter(aes(colour = Var2), shape=16, position=position_jitter(0.2), alpha=0.6, size = 2.25) + 
+  geom_boxplot(aes(colour = Var2), fill = NA, outlier.shape = NA) + 
+  scale_colour_manual(values = CT2cols) +
+  ylim(c(-1.9,1.9)) +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 60, hjust=1, size=6, color="black"), axis.text.y = element_text(color="black")) + 
+  labs(title="Chr15q11-q13 Protein-Coding Gene Expression: CT2smDEL", x ="Gene", y = "log2(foldChange)")
+CT2smDELboxplot
+#Save as pdf
+pdf("Chr15q11-q13_GeneExp_smDEL.pdf", width = 8, height = 7)
+H9smDELboxplot
+CT2smDELboxplot
+dev.off()
