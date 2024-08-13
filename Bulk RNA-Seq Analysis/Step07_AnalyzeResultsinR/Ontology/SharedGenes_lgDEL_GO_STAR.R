@@ -9,6 +9,7 @@ library("data.table")
 library("enrichplot")
 library("ggnewscale")
 library("tibble")
+library("gplots")
 
 #Set working directory
 directory <- "../Cotney_Lab/PWS_RNASeq/STAR/lgDEL"
@@ -621,7 +622,7 @@ pdf("PWSexp_emapplots.pdf", width = 10, height = 8)
 emap1
 dev.off()
 
-#Determine expression of ribosomal genes from MF/disease ontolgies
+##Determine expression of ribosomal genes from MF/disease ontologies
   #To find list of all genes under specific GO term
 ensembl = useMart("ensembl",dataset="hsapiens_gene_ensembl")
 gene.data <- getBM(attributes=c('hgnc_symbol', 'ensembl_gene_id', 'go_id', 'name_1006', 'definition_1006'), filters = 'go', values = 'GO:0003735', mart = ensembl)
@@ -630,11 +631,36 @@ gene_ont_MFribo$hgnc_symbol[gene_ont_MFribo$hgnc_symbol == ""] <- NA
 gene_ont_MFribo <- gene_ont_MFribo %>% drop_na(hgnc_symbol)
 #Drop top two MT genes
 MFribo_list <- unique(gene_ont_MFribo$hgnc_symbol)
-write.table(MFribo_list, "allGO0003735_symbols.txt", quote=FALSE, row.names = FALSE, col.names = FALSE)
+  write.table(MFribo_list, "allGO0003735_symbols.txt", quote=FALSE, row.names = FALSE, col.names = FALSE)
   #To find list of genes present from list of shared genes
 myRibo_list <- summary_allMF[1,8]
-write.table(myRibo_list, "myGenes_GO0003735_symbols.txt", quote=FALSE, row.names = FALSE, col.names = FALSE) #Put in Notepad++ and replace "/" with "\n"
+  write.table(myRibo_list, "myGenes_GO0003735_symbols.txt", quote=FALSE, row.names = FALSE, col.names = FALSE) #Put in Notepad++ and replace "/" with "\n"
 myRibo_list <- scan("myGenes_GO0003735_symbols.txt", what="", sep="\n")
 #Make overall list without my genes
 MFribo_minusMine <- MFribo_list %>% filter(!MFribo_list$V1 %in% myRibo_list$V1)
-write.table(MFribo_minusMine, "GO0003735_symbols_minusMyGenes.txt", quote=FALSE, row.names = FALSE, col.names = FALSE)
+  write.table(MFribo_minusMine, "GO0003735_symbols_minusMyGenes.txt", quote=FALSE, row.names = FALSE, col.names = FALSE)
+#Read in & format GTEx table (converted .gct file downloaded from GTEx to .txt file for reading in)
+GTEx <- read.delim("GTEx_Analysis_2017-06-05_v8_RNASeQCv1.1.9_gene_median_tpm.txt", sep="\t", head=T)
+colnames(GTEx) <- c("GeneID", "GeneName", "Adipose - Subcutaneous", "Adipose - Visceral (Omentum)",	"Adrenal Gland",	"Artery - Aorta",	"Artery - Coronary",	"Artery - Tibial",	"Bladder",	"Brain - Amygdala",	"Brain - Anterior cingulate cortex (BA24)",	"Brain - Caudate (basal ganglia)",	"Brain - Cerebellar Hemisphere",	"Brain - Cerebellum",	"Brain - Cortex",	"Brain - Frontal Cortex (BA9)",	"Brain - Hippocampus",	"Brain - Hypothalamus",	"Brain - Nucleus accumbens (basal ganglia)",	"Brain - Putamen (basal ganglia)",	"Brain - Spinal cord (cervical c-1)",	"Brain - Substantia nigra",	"Breast - Mammary Tissue",	"Cells - Cultured fibroblasts",	"Cells - EBV-transformed lymphocytes",	"Cervix - Ectocervix",	"Cervix - Endocervix",	"Colon - Sigmoid",	"Colon - Transverse",	"Esophagus - Gastroesophageal Junction",	"Esophagus - Mucosa",	"Esophagus - Muscularis",	"Fallopian Tube",	"Heart - Atrial Appendage",	"Heart - Left Ventricle",	"Kidney - Cortex",	"Kidney - Medulla",	"Liver",	"Lung",	"Minor Salivary Gland",	"Muscle - Skeletal",	"Nerve - Tibial",	"Ovary",	"Pancreas",	"Pituitary",	"Prostate",	"Skin - Not Sun Exposed (Suprapubic)",	"Skin - Sun Exposed (Lower leg)",	"Small Intestine - Terminal Ileum",	"Spleen",	"Stomach",	"Testis",	"Thyroid",	"Uterus",	"Vagina",	"Whole Blood")
+#Parse genes from GTEx table
+myRibo_GTEx <- GTEx[(GTEx$GeneName) %in% myRibo_list, ]
+row.names(myRibo_GTEx) <- myRibo_GTEx$GeneName
+myRibo_GTEx <- myRibo_GTEx[c(3:56)]
+#Plot
+heatmapMat_myRibo <- data.matrix(myRibo_GTEx)
+hr_myRibo <- hclust(as.dist(1-cor(t(heatmapMat_myRibo), method="spearman")), method="complete")
+hc_myRibo <- hclust(as.dist(1-cor(heatmapMat_myRibo, method="spearman")), method="complete")
+heatmap.2( heatmapMat_myRibo, key=T, scale="row", 
+           trace="none", Rowv=as.dendrogram(hr_myRibo), Colv=as.dendrogram(hc_myRibo), dendrogram = "row", cexRow = .4, cexCol = .7,
+           col = colorRampPalette(c("blue", "white", "red"))(n = 1000))
+pdf("myRiboHeatmap_skinny.pdf", width = 9, height = 4)
+heatmap.2( heatmapMat_myRibo, key=T, scale="row", 
+           trace="none", Rowv=as.dendrogram(hr_myRibo), Colv=as.dendrogram(hc_myRibo), dendrogram = "row", cexRow = .4, cexCol = .7,
+           col = colorRampPalette(c("blue", "white", "red"))(n = 1000))
+dev.off()
+pdf("myRiboHeatmap_reg.pdf", width = 10, height = 8)
+heatmap.2( heatmapMat_myRibo, key=T, scale="row", 
+           trace="none", Rowv=as.dendrogram(hr_myRibo), Colv=as.dendrogram(hc_myRibo), dendrogram = "row", cexRow = .4, cexCol = .7,
+           col = colorRampPalette(c("blue", "white", "red"))(n = 1000))
+dev.off()
+
