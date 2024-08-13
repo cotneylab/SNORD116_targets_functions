@@ -1,3 +1,3 @@
 R code for snoGloBe analysis. \
 Shell script for determining genomic feature coverage. \
-Folder of permutations done on random gene lists.
+Zip file of folder with permutations done on 100 random gene lists as control.
