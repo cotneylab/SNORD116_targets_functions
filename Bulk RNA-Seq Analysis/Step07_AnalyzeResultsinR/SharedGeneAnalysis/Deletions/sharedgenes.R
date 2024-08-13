@@ -184,3 +184,35 @@ colnames(SharedlgsmDEL_ID) <- c("Ensembl.ID")
 #Order list of all TFs & parse by shared gene list
 TFall <- TFall[order(TFall$Ensembl.ID),]
 sharedTF <- merge(TFall, SharedlgsmDEL_ID, by="Ensembl.ID", sort=TRUE, all = FALSE)
+
+##--To find relative expression of shared genes across GTEx tissues--##
+library("gplots")
+#Read in & format GTEx table (converted .gct file downloaded from GTEx to .txt file for reading in)
+GTEx <- read.delim("lgDEL/GTEx_Analysis_2017-06-05_v8_RNASeQCv1.1.9_gene_median_tpm.txt", sep="\t", head=T)
+colnames(GTEx) <- c("GeneID", "GeneName", "Adipose - Subcutaneous", "Adipose - Visceral (Omentum)",	"Adrenal Gland",	"Artery - Aorta",	"Artery - Coronary",	"Artery - Tibial",	"Bladder",	"Brain - Amygdala",	"Brain - Anterior cingulate cortex (BA24)",	"Brain - Caudate (basal ganglia)",	"Brain - Cerebellar Hemisphere",	"Brain - Cerebellum",	"Brain - Cortex",	"Brain - Frontal Cortex (BA9)",	"Brain - Hippocampus",	"Brain - Hypothalamus",	"Brain - Nucleus accumbens (basal ganglia)",	"Brain - Putamen (basal ganglia)",	"Brain - Spinal cord (cervical c-1)",	"Brain - Substantia nigra",	"Breast - Mammary Tissue",	"Cells - Cultured fibroblasts",	"Cells - EBV-transformed lymphocytes",	"Cervix - Ectocervix",	"Cervix - Endocervix",	"Colon - Sigmoid",	"Colon - Transverse",	"Esophagus - Gastroesophageal Junction",	"Esophagus - Mucosa",	"Esophagus - Muscularis",	"Fallopian Tube",	"Heart - Atrial Appendage",	"Heart - Left Ventricle",	"Kidney - Cortex",	"Kidney - Medulla",	"Liver",	"Lung",	"Minor Salivary Gland",	"Muscle - Skeletal",	"Nerve - Tibial",	"Ovary",	"Pancreas",	"Pituitary",	"Prostate",	"Skin - Not Sun Exposed (Suprapubic)",	"Skin - Sun Exposed (Lower leg)",	"Small Intestine - Terminal Ileum",	"Spleen",	"Stomach",	"Testis",	"Thyroid",	"Uterus",	"Vagina",	"Whole Blood")
+#Duplicate gene ID column & reorder
+GTEx$ensembl_gene_id <- GTEx$GeneID
+GTEx <- GTEx[c(1,57,2:56)]
+#Remove decimal in gene name
+GTEx$ensembl_gene_id <- gsub('\\..+$', '', GTEx$ensembl_gene_id)
+#Parse genes from GTEx table
+shared_ENSEMBL <- GTEx[(GTEx$ensembl_gene_id) %in% sharedlgsmDEL, ]
+row.names(shared_ENSEMBL) <- shared_ENSEMBL$GeneName
+shared_ENSEMBL <- shared_ENSEMBL[c(4:56)]
+#Plot
+heatmapMat <- data.matrix(shared_ENSEMBL)
+hr <- hclust(as.dist(1-cor(t(heatmapMat), method="spearman")), method="complete")
+hc <- hclust(as.dist(1-cor(heatmapMat, method="spearman")), method="complete")
+heatmap.2( heatmapMat, key=T, scale="row", 
+           trace="none", Rowv=as.dendrogram(hr), Colv=as.dendrogram(hc), dendrogram = "row", cexRow = .6, cexCol = .7,
+           col = colorRampPalette(c("blue", "white", "red"))(n = 1000))
+pdf("sharedGenes_GTExHeatmap_skinny.pdf", width = 9, height = 4)
+heatmap.2( heatmapMat, key=T, scale="row", 
+           trace="none", Rowv=as.dendrogram(hr), Colv=as.dendrogram(hc), dendrogram = "row", cexRow = .6, cexCol = .7,
+           col = colorRampPalette(c("blue", "white", "red"))(n = 1000))
+dev.off()
+pdf("sharedGenes_GTExHeatmap_reg.pdf", width = 10, height = 8)
+heatmap.2( heatmapMat, key=T, scale="row", 
+           trace="none", Rowv=as.dendrogram(hr), Colv=as.dendrogram(hc), dendrogram = "row", cexRow = .6, cexCol = .7,
+           col = colorRampPalette(c("blue", "white", "red"))(n = 1000))
+dev.off()
