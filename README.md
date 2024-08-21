@@ -1,4 +1,5 @@
 # SNORD116_targets_functions
+<img src="Graphical Abstract.jpg" alt="Graphical Abstract">
 Scripts for processing and analyzing data associated with “Identifying key underlying regulatory networks and predicting targets of orphan C/D box SNORD116 snoRNAs in Prader-Willi syndrome.” Raw sequencing data will be available through the Gene Expression Omnibus (GEO) upon publication.
 
 First, bulk RNA-Seq analysis was performed, followed by snoRNA prediction using snoGloBe.
